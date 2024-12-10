@@ -7,7 +7,7 @@
     ]
   },
   "mark": "point",
-  "encoding": {
+  "axes": {
     "x": {"field": "a", "type": "ordinal", "orient": "top", "title": "Rows", "labelAngle": 0},
     "y": {"field": "b", "type": "quantitative", "title": "Columns"}
   }
