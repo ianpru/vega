@@ -1,4 +1,10 @@
 {
+  "config":{
+      "axisX": {
+          "orient": "top",
+          "labelAngle": 0;
+      }
+  }
   "data": {
     "values": [
       {"a": "A","b": 28}, {"a": "B","b": 55}, {"a": "C","b": 43},
@@ -7,8 +13,8 @@
     ]
   },
   "mark": "point",
-  "axes": {
-    "x": {"field": "a", "type": "ordinal", "orient": "top", "title": "Rows", "labelAngle": 0},
+  "encoding": {
+    "x": {"field": "a", "type": "ordinal", "title": "Rows"},
     "y": {"field": "b", "type": "quantitative", "title": "Columns"}
   }
 }
