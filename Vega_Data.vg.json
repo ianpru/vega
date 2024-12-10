@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "A basic bar chart example, with value labels shown upon pointer hover.",
-  "width": 400,
+  "description": "A basic scatter plot example depicting automobile statistics.",
+  "width": 200,
   "height": 200,
   "padding": 5,
 
@@ -9,86 +9,152 @@
     {
       "name": "table",
       "values": [
-        {"category": "A", "amount": 28},
-        {"category": "B", "amount": 55},
-        {"category": "C", "amount": 43},
-        {"category": "D", "amount": 91},
-        {"category": "E", "amount": 81},
-        {"category": "F", "amount": 53},
-        {"category": "G", "amount": 19},
-        {"category": "H", "amount": 87}
-      ]
-    }
-  ],
-
-  "signals": [
-    {
-      "name": "tooltip",
-      "value": {},
-      "on": [
-        {"events": "rect:pointerover", "update": "datum"},
-        {"events": "rect:pointerout",  "update": "{}"}
+   {
+      "Name":"chevrolet chevelle malibu",
+      "Miles_per_Gallon":18,
+      "Cylinders":8,
+      "Displacement":307,
+      "Horsepower":130,
+      "Weight_in_lbs":3504,
+      "Acceleration":12,
+      "Year":"1970-01-01",
+      "Origin":"USA"
+   },
+   {
+      "Name":"buick skylark 320",
+      "Miles_per_Gallon":15,
+      "Cylinders":8,
+      "Displacement":350,
+      "Horsepower":165,
+      "Weight_in_lbs":3693,
+      "Acceleration":11.5,
+      "Year":"1970-01-01",
+      "Origin":"USA"
+   },
+   {
+      "Name":"plymouth satellite",
+      "Miles_per_Gallon":18,
+      "Cylinders":8,
+      "Displacement":318,
+      "Horsepower":150,
+      "Weight_in_lbs":3436,
+      "Acceleration":11,
+      "Year":"1970-01-01",
+      "Origin":"USA"
+   },
+   {
+      "Name":"amc rebel sst",
+      "Miles_per_Gallon":16,
+      "Cylinders":8,
+      "Displacement":304,
+      "Horsepower":150,
+      "Weight_in_lbs":3433,
+      "Acceleration":12,
+      "Year":"1970-01-01",
+      "Origin":"USA"
+   },
+   {
+      "Name":"ford torino",
+      "Miles_per_Gallon":17,
+      "Cylinders":8,
+      "Displacement":302,
+      "Horsepower":140,
+      "Weight_in_lbs":3449,
+      "Acceleration":10.5,
+      "Year":"1970-01-01",
+      "Origin":"USA"
+   },
+   {
+      "Name":"ford galaxie 500",
+      "Miles_per_Gallon":15,
+      "Cylinders":8,
+      "Displacement":429,
+      "Horsepower":198,
+      "Weight_in_lbs":4341,
+      "Acceleration":10,
+      "Year":"1970-01-01",
+      "Origin":"USA"
+   },
       ]
     }
   ],
 
   "scales": [
     {
-      "name": "xscale",
-      "type": "band",
-      "domain": {"data": "table", "field": "category"},
-      "range": "width",
-      "padding": 0.05,
-      "round": true
+      "name": "x",
+      "type": "linear",
+      "round": true,
+      "nice": true,
+      "zero": true,
+      "domain": {"data": "source", "field": "Horsepower"},
+      "range": "width"
     },
     {
-      "name": "yscale",
-      "domain": {"data": "table", "field": "amount"},
+      "name": "y",
+      "type": "linear",
+      "round": true,
       "nice": true,
+      "zero": true,
+      "domain": {"data": "source", "field": "Miles_per_Gallon"},
       "range": "height"
+    },
+    {
+      "name": "size",
+      "type": "linear",
+      "round": true,
+      "nice": false,
+      "zero": true,
+      "domain": {"data": "source", "field": "Acceleration"},
+      "range": [4,361]
     }
   ],
 
   "axes": [
-    { "orient": "bottom", "scale": "xscale" },
-    { "orient": "left", "scale": "yscale" }
+    {
+      "scale": "x",
+      "grid": true,
+      "domain": false,
+      "orient": "bottom",
+      "tickCount": 5,
+      "title": "Horsepower"
+    },
+    {
+      "scale": "y",
+      "grid": true,
+      "domain": false,
+      "orient": "left",
+      "titlePadding": 5,
+      "title": "Miles_per_Gallon"
+    }
+  ],
+
+  "legends": [
+    {
+      "size": "size",
+      "title": "Acceleration",
+      "format": "s",
+      "symbolStrokeColor": "#4682b4",
+      "symbolStrokeWidth": 2,
+      "symbolOpacity": 0.5,
+      "symbolType": "circle"
+    }
   ],
 
   "marks": [
     {
-      "type": "rect",
-      "from": {"data":"table"},
+      "name": "marks",
+      "type": "symbol",
+      "from": {"data": "source"},
       "encode": {
-        "enter": {
-          "x": {"scale": "xscale", "field": "category"},
-          "width": {"scale": "xscale", "band": 1},
-          "y": {"scale": "yscale", "field": "amount"},
-          "y2": {"scale": "yscale", "value": 0}
-        },
         "update": {
-          "fill": {"value": "steelblue"}
-        },
-        "hover": {
-          "fill": {"value": "red"}
-        }
-      }
-    },
-    {
-      "type": "text",
-      "encode": {
-        "enter": {
-          "align": {"value": "center"},
-          "baseline": {"value": "bottom"},
-          "fill": {"value": "#333"}
-        },
-        "update": {
-          "x": {"scale": "xscale", "signal": "tooltip.category", "band": 0.5},
-          "y": {"scale": "yscale", "signal": "tooltip.amount", "offset": -2},
-          "text": {"signal": "tooltip.amount"},
-          "fillOpacity": [
-            {"test": "datum === tooltip", "value": 0},
-            {"value": 1}
-          ]
+          "x": {"scale": "x", "field": "Horsepower"},
+          "y": {"scale": "y", "field": "Miles_per_Gallon"},
+          "size": {"scale": "size", "field": "Acceleration"},
+          "shape": {"value": "circle"},
+          "strokeWidth": {"value": 2},
+          "opacity": {"value": 0.5},
+          "stroke": {"value": "#4682b4"},
+          "fill": {"value": "transparent"}
         }
       }
     }
