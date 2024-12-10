@@ -76,7 +76,7 @@
     {
       "name": "marks",
       "type": "symbol",
-      "from": {"data": "source"},
+      "from": {"data": "table"},
       "encode": {
         "update": {
           "x": {"scale": "x", "field": "category"},
