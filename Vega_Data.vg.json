@@ -86,7 +86,7 @@
       "round": true,
       "nice": true,
       "zero": true,
-      "domain": {"data": "source", "field": "Horsepower"},
+      "domain": {"data": "table", "field": "Horsepower"},
       "range": "width"
     },
     {
@@ -95,7 +95,7 @@
       "round": true,
       "nice": true,
       "zero": true,
-      "domain": {"data": "source", "field": "Miles_per_Gallon"},
+      "domain": {"data": "table", "field": "Miles_per_Gallon"},
       "range": "height"
     },
     {
@@ -104,7 +104,7 @@
       "round": true,
       "nice": false,
       "zero": true,
-      "domain": {"data": "source", "field": "Acceleration"},
+      "domain": {"data": "table", "field": "Acceleration"},
       "range": [4,361]
     }
   ],
@@ -144,7 +144,7 @@
     {
       "name": "marks",
       "type": "symbol",
-      "from": {"data": "source"},
+      "from": {"data": "table"},
       "encode": {
         "update": {
           "x": {"scale": "x", "field": "Horsepower"},
