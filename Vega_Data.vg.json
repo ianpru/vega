@@ -48,7 +48,7 @@
       "domain": false,
       "orient": "bottom",
       "tickCount": 5,
-      "title": "Category"
+      "title": "category"
     },
     {
       "scale": "y",
