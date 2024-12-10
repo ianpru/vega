@@ -2,7 +2,7 @@
   "config":{
       "axisX": {
           "orient": "top",
-          "labelAngle": 0;
+          "labelAngle": 0,
       }
   }
   "data": {
