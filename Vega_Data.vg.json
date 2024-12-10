@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "A basic bar chart example, with value labels shown upon pointer hover.",
+  "description": "A basic scatter plot",
   "width": 400,
   "height": 200,
   "padding": 5,
@@ -9,86 +9,84 @@
     {
       "name": "table",
       "values": [
-        {"category": "A", "amount": 28},
-        {"category": "B", "amount": 55},
-        {"category": "C", "amount": 43},
-        {"category": "D", "amount": 91},
-        {"category": "E", "amount": 81},
-        {"category": "F", "amount": 53},
-        {"category": "G", "amount": 19},
-        {"category": "H", "amount": 87}
+        {"category": "A", "amount": 28, "Acceleration": 1},
+        {"category": "B", "amount": 55, "Acceleration": 1},
+        {"category": "C", "amount": 43, "Acceleration": 1},
+        {"category": "D", "amount": 91, "Acceleration": 1},
+        {"category": "E", "amount": 81, "Acceleration": 1},
+        {"category": "F", "amount": 53, "Acceleration": 1},
+        {"category": "G", "amount": 19, "Acceleration": 1},
+        {"category": "H", "amount": 87, "Acceleration": 1}
       ]
     }
   ],
-
-  "signals": [
-    {
-      "name": "tooltip",
-      "value": {},
-      "on": [
-        {"events": "rect:pointerover", "update": "datum"},
-        {"events": "rect:pointerout",  "update": "{}"}
-      ]
-    }
-  ],
-
+  
   "scales": [
     {
       "name": "xscale",
-      "type": "band",
+      "type": "linear",
       "domain": {"data": "table", "field": "category"},
       "range": "width",
-      "padding": 0.05,
-      "round": true
+      "nice": true,
+      "round": true,
+      "zero": true
     },
     {
       "name": "yscale",
       "domain": {"data": "table", "field": "amount"},
+      "round": true,
       "nice": true,
+      "zero": true,
       "range": "height"
     }
   ],
 
   "axes": [
-    { "orient": "bottom", "scale": "xscale" },
-    { "orient": "left", "scale": "yscale" }
+    {
+      "scale": "x",
+      "grid": true,
+      "domain": false,
+      "orient": "bottom",
+      "tickCount": 5,
+      "title": "Category"
+    },
+    {
+      "scale": "y",
+      "grid": true,
+      "domain": false,
+      "orient": "left",
+      "titlePadding": 5,
+      "title": "amount"
+    }
+  ],
+
+  "legends": [
+    {
+      "size": "size",
+      "title": "Acceleration",
+      "format": "s",
+      "symbolStrokeColor": "#4682b4",
+      "symbolStrokeWidth": 2,
+      "symbolOpacity": 0.5,
+      "symbolType": "circle"
+    }
   ],
 
   "marks": [
     {
-      "type": "rect",
-      "from": {"data":"table"},
+      "name": "marks",
+      "type": "symbol",
+      "from": {"data": "source"},
       "encode": {
-        "enter": {
-          "x": {"scale": "xscale", "field": "category"},
-          "width": {"scale": "xscale", "band": 1},
-          "y": {"scale": "yscale", "field": "amount"},
-          "y2": {"scale": "yscale", "value": 0}
-        },
         "update": {
-          "fill": {"value": "steelblue"}
-        },
-        "hover": {
-          "fill": {"value": "red"}
-        }
-      }
-    },
-    {
-      "type": "text",
-      "encode": {
-        "enter": {
-          "align": {"value": "center"},
-          "baseline": {"value": "bottom"},
-          "fill": {"value": "#333"}
-        },
-        "update": {
-          "x": {"scale": "xscale", "signal": "tooltip.category", "band": 0.5},
-          "y": {"scale": "yscale", "signal": "tooltip.amount", "offset": -2},
-          "text": {"signal": "tooltip.amount"},
-          "fillOpacity": [
-            {"test": "datum === tooltip", "value": 0},
-            {"value": 1}
-          ]
+          "x": {"scale": "x", "field": "category"},
+          "y": {"scale": "y", "field": "amount"},
+          "size": {"scale": "size", "field": "Acceleration"},
+          "shape": {"value": "circle"},
+          "strokeWidth": {"value": 2},
+          "opacity": {"value": 0.5},
+          "stroke": {"value": "#4682b4"},
+          "fill": {"value": "transparent"}
         }
       }
     }
