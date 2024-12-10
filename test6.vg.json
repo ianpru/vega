@@ -16,7 +16,7 @@
   "encoding": {
     "x": {"field": "a", "type": "ordinal", "title": "Rows", 
           "axis": {"orient": "top",
-          "labelAngle": 0,}
+          "labelAngle": 0}
     },
     "y": {"field": "b", "type": "quantitative", "title": "Columns"}
   }
