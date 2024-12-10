@@ -8,7 +8,10 @@
   },
   "mark": "point",
   "encoding": {
-    "x": {"field": "a", "type": "ordinal", "title": "Rows"},
+    "x": {"field": "a", "type": "ordinal", "title": "Rows", 
+          "axis": {"orient": "top",
+          "labelAngle": 0}
+    },
     "y": {"field": "b", "type": "quantitative", "title": "Columns"}
   }
 }
